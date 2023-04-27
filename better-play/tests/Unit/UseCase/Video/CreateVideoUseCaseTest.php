@@ -54,6 +54,9 @@ class CreateVideoUseCaseTest extends TestCase
         $this->assertNotEmpty($responseUseCase->id);
         $this->assertEquals('title', $responseUseCase->title);
         $this->assertEquals('description', $responseUseCase->description);
+        $this->assertEquals(2029, $responseUseCase->yearLaunched);
+        $this->assertEquals('18', $responseUseCase->censure);
+        $this->assertNotEmpty($responseUseCase->published);
         $this->assertNotEmpty($responseUseCase->created_at);
     }
 }

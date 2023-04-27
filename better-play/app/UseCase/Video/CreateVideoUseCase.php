@@ -43,7 +43,7 @@ class CreateVideoUseCase
             duration: $newEntity->duration,
             opened: $newEntity->opened,
             rating: $newEntity->rating,
-            // censure: $input->censure,
+            censure: $newEntity->censure->value,
             published: $newEntity->published,
             created_at: $newEntity->createdAt(),
         );

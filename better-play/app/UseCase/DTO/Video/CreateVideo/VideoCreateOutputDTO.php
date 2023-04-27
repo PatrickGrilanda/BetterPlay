@@ -12,7 +12,7 @@ class VideoCreateOutputDTO
         public int $duration,
         public bool $opened,
         public int  $rating,
-        // public Censure $censure,
+        public string $censure,
         public bool $published,
         public string $created_at,
     ) {
