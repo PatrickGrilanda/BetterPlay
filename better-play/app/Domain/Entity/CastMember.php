@@ -20,8 +20,6 @@ class CastMember
     ) {
         $this->id = $this->id ? new Uuid($this->id) : Uuid::random();
         $this->createdAt = $this->createdAt ? new DateTime($this->createdAt) : new DateTime();
-
-        $this->validate();
     }
 
     public function update(
@@ -30,8 +28,6 @@ class CastMember
     ) {
         $this->name = $name;
         $this->type = $type;
-
-        $this->validate();
     }
 
     public function validate()

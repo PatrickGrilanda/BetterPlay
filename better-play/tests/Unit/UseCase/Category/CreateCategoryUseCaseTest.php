@@ -43,6 +43,7 @@ class CreateCategoryUseCaseTest extends TestCase
         $this->assertNotEmpty($responseUseCase->id);
         $this->assertEquals($categoryName, $responseUseCase->name);
         $this->assertEquals($categoryDescription, $responseUseCase->description);
+        $this->assertNotEmpty($responseUseCase->created_at);
 
 
         /**
