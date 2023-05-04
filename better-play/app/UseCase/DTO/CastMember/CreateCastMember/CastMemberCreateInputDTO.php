@@ -2,11 +2,13 @@
 
 namespace BetterPlay\UseCase\DTO\CastMember\CreateCastMember;
 
+use BetterPlay\Domain\Enum\CastMemberType;
+
 class CastMemberCreateInputDTO
 {
     public function __construct(
         public string $name,
-        public int $type,
+        public CastMemberType $type,
     ) {
     }
 }

@@ -2,6 +2,8 @@
 
 namespace BetterPlay\UseCase\DTO\Video\CreateVideo;
 
+use BetterPlay\Domain\Enum\Censure;
+
 class VideoCreateOutputDTO
 {
     public function __construct(
@@ -12,8 +14,12 @@ class VideoCreateOutputDTO
         public int $duration,
         public bool $opened,
         public int  $rating,
-        public string $censure,
+        public Censure $censure,
         public bool $published,
+        public array $categories = [],
+        public array $genres = [],
+        public array $castMembers = [],
+        public array $comments = [],
         public string $created_at,
     ) {
     }

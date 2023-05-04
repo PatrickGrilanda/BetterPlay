@@ -21,6 +21,42 @@ class CreateVideoUseCase
 
     public function execute(VideoCreateInputDTO $input): VideoCreateOutputDTO
     {
+        //Create entity
+        $entity = $this->createEntity($input);
+
+
+        //Entity persiste
+        $newEntity = $this->repository->insert($entity);
+
+
+        //Storage media content
+        //$this->storageFiles($input);
+        //$this->repository->updateMedia($input);
+
+        //Dispatch event manager to media processed
+
+
+
+        return new VideoCreateOutputDTO(
+            id: $newEntity->id(),
+            title: $newEntity->title,
+            description: $newEntity->description,
+            yearLaunched: $newEntity->yearLaunched,
+            duration: $newEntity->duration,
+            opened: $newEntity->opened,
+            rating: $newEntity->rating,
+            censure: $newEntity->censure,
+            published: $newEntity->published,
+            categories: $newEntity->categoriesId,
+            genres: $newEntity->genresId,
+            castMembers: $newEntity->castMemberIds,
+            comments: $newEntity->commentsId,
+            created_at: $newEntity->createdAt(),
+        );
+    }
+
+    private function createEntity(VideoCreateInputDTO $input)
+    {
         $entity = new Video(
             title: $input->title,
             description: $input->description,
@@ -33,19 +69,34 @@ class CreateVideoUseCase
 
         );
 
-        $newEntity = $this->repository->insert($entity);
+        //Add categories_id in entity
+        foreach ($input->categories as $categoryId) {
+            $entity->addCategoryId(
+                categoryId: $categoryId,
+            );
+        }
 
-        return new VideoCreateOutputDTO(
-            id: $newEntity->id(),
-            title: $newEntity->title,
-            description: $newEntity->description,
-            yearLaunched: $newEntity->yearLaunched,
-            duration: $newEntity->duration,
-            opened: $newEntity->opened,
-            rating: $newEntity->rating,
-            censure: $newEntity->censure->value,
-            published: $newEntity->published,
-            created_at: $newEntity->createdAt(),
-        );
+        //Add genres_id in entity
+        foreach ($input->genres as $genreId) {
+            $entity->addGenreId(
+                genreId: $genreId,
+            );
+        }
+
+        //Add cast_members_id in entity
+        foreach ($input->castMembers as $castMemberId) {
+            $entity->addCastMemberId(
+                castMemberId: $castMemberId,
+            );
+        }
+
+        //Add comments_id in entity
+        foreach ($input->comments as $commentId) {
+            $entity->addCommentId(
+                commentId: $commentId,
+            );
+        }
+
+        return $entity;
     }
 }

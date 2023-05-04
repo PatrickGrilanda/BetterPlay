@@ -20,4 +20,6 @@ interface VideoRepositoryInterface
     public function update(Video $video): Video;
 
     public function delete(string $videoId): bool;
+
+    public function updateMedia(Video $video): Video;
 }

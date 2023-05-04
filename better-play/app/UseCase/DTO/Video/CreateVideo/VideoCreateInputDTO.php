@@ -15,6 +15,10 @@ class VideoCreateInputDTO
         public int  $rating,
         public Censure $censure,
         public bool $published,
+        public array $categories = [],
+        public array $genres = [],
+        public array $castMembers = [],
+        public array $comments = []
     ) {
     }
 }

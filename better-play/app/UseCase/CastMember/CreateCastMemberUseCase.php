@@ -23,7 +23,7 @@ class CreateCastMemberUseCase
     {
         $entity = new CastMember(
             name: $input->name,
-            type: $input->type == 1 ? CastMemberType::DIRECTOR : CastMemberType::ACTOR
+            type: $input->type
 
         );
 

@@ -27,14 +27,14 @@ class CreateCastMemberUseCaseTest extends TestCase
         $mockRepository->shouldReceive('insert')->once()->andReturn($mockEntity);
         $useCase = new CreateCastMemberUseCase($mockRepository);
 
-        $mockDto = Mockery::mock(CastMemberCreateInputDTO::class, ['name', 2]);
+        $mockDto = Mockery::mock(CastMemberCreateInputDTO::class, ['name', CastMemberType::ACTOR]);
 
         $responseUseCase = $useCase->execute($mockDto);
 
         $this->assertInstanceOf(CastMemberCreateOutputDTO::class, $responseUseCase);
         $this->assertNotEmpty($responseUseCase->id);
         $this->assertEquals('name', $responseUseCase->name);
-        $this->assertEquals(2, $responseUseCase->type);
+        $this->assertEquals(CastMemberType::ACTOR, $responseUseCase->type);
         $this->assertNotEmpty($responseUseCase->created_at);
     }
 }
