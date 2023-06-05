@@ -2,26 +2,21 @@
 
 namespace App\Models;
 
+use App\Models\Traits\IdentifiesUsingUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CastMember extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, IdentifiesUsingUuids;
 
-    protected $fillable = [
-        'id',
-        'name',
-        'type',
-        'created_at',
-    ];
-
+    protected $keyType = 'string';
     public $incrementing = false;
 
-    protected $casts = [
-        'id' => 'string',
-        'deleted_at' => 'datetime',
+    protected $fillable = [
+        'name',
+        'type'
     ];
 
     public function videos()

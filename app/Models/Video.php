@@ -4,32 +4,20 @@ namespace App\Models;
 
 use App\Enums\ImageTypes;
 use App\Enums\MediaTypes;
+use App\Models\Traits\IdentifiesUsingUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Video extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, IdentifiesUsingUuids;
 
-    protected $fillable = [
-        'id',
-        'title',
-        'description',
-        'year_launched',
-        'opened',
-        'rating',
-        'duration',
-        'created_at',
-    ];
 
+    protected $keyType = 'string';
     public $incrementing = false;
 
-    protected $casts = [
-        'id' => 'string',
-        'is_active' => 'boolean',
-        'deleted_at' => 'datetime',
-    ];
+    protected $guarded = ['id'];
 
     public function categories()
     {
@@ -49,35 +37,5 @@ class Video extends Model
     public function comments()
     {
         return $this->belongsToMany(Comment::class);
-    }
-
-    public function media()
-    {
-        return $this->hasOne(Media::class)
-            ->where('type', (string) MediaTypes::VIDEO->value);
-    }
-
-    public function trailer()
-    {
-        return $this->hasOne(Media::class)
-            ->where('type', (string) MediaTypes::TRAILER->value);
-    }
-
-    public function banner()
-    {
-        return $this->hasOne(ImageVideo::class)
-            ->where('type', (string) ImageTypes::BANNER->value);
-    }
-
-    public function thumb()
-    {
-        return $this->hasOne(ImageVideo::class)
-            ->where('type', (string) ImageTypes::THUMB->value);
-    }
-
-    public function thumbHalf()
-    {
-        return $this->hasOne(ImageVideo::class)
-            ->where('type', (string) ImageTypes::THUMB_HALF->value);
     }
 }

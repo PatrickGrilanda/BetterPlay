@@ -2,33 +2,27 @@
 
 namespace App\Models;
 
+use App\Models\Traits\IdentifiesUsingUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Genre extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, IdentifiesUsingUuids;
 
-    protected $fillable = [
-        'id',
-        'name',
-        'is_active',
-        'created_at',
-    ];
-
+    protected $keyType = 'string';
     public $incrementing = false;
 
-    protected $casts = [
-        'id' => 'string',
-        'is_active' => 'boolean',
-        'deleted_at' => 'datetime',
+    protected $fillable = [
+        'name',
+        'is_active',
     ];
 
-    public function categories()
-    {
-        return $this->belongsToMany(Category::class);
-    }
+
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
 
     public function videos()
     {

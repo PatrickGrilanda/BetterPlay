@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BetterPlayController;
+use App\Http\Controllers\VideoPlayerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
+
+Route::get('/movies', [BetterPlayController::class, 'index'])->name('betterplay.index');
+
+Route::get('/play/{id}', [VideoPlayerController::class, 'player'])->name('video.play');
